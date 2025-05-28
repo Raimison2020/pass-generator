@@ -34,5 +34,17 @@ const generatePassword = () => {
    // Gerando a senha aleatória (for)
    for (let i = 0; i < passLength; i++) {
       let randomChar = staticPassword[Math.floor(Math.random() * staticPassword.length)]
+      
+      if (excludeDuplicate) {
+         if (!randomPassword.includes(randomChar) || randomChar == " ") {
+            randomPassword += randomChar
+         } else {
+            i--
+         }
+      } else {
+         randomPassword += randomChar
+      }
    }
+
+   passwordInput.value = randomPassword
 }
