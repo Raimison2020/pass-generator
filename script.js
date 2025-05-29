@@ -34,7 +34,7 @@ const generatePassword = () => {
    // Gerando a senha aleatória (for)
    for (let i = 0; i < passLength; i++) {
       let randomChar = staticPassword[Math.floor(Math.random() * staticPassword.length)]
-      
+
       if (excludeDuplicate) {
          if (!randomPassword.includes(randomChar) || randomChar == " ") {
             randomPassword += randomChar
@@ -48,3 +48,32 @@ const generatePassword = () => {
 
    passwordInput.value = randomPassword
 }
+
+// Função updatePassIndicator
+const updatePassIndicator = () => {
+   passIndicator.id = lengthSlider.value <= 8 ? "weak" : lengthSlider.value <= 16 ? "medium" : "strong"
+}
+
+// Função updateSlider
+const updateSlider = () => {
+   document.querySelector(".pass-length span").innerText = lengthSlider.value
+   generatePassword()
+   updatePassIndicator()
+}
+updateSlider()
+
+// Copy Pass
+const copyPassword = () => {
+   navigator.clipboard.writeText(passwordInput.value)
+   copyIcon.innerText = "check"
+   copyIcon.computedStyleMap.color = "#4285f4"
+   setTimeout(() => {
+      copyIcon.innerText = "copy_all"
+      copyIcon.style.color = "#707070"
+   }, 1500)
+}
+
+// Events
+copyIcon.addEventListener("click", copyPassword)
+lengthSlider.addEventListener("input", updateSlider)
+generateBtn.addEventListener("click", generatePassword)
