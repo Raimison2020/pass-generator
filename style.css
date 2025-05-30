@@ -59,7 +59,7 @@ body {
 }
 
 .input-box span:hover {
-   color: #43A047;
+   color: #43A047 !important;
 }
 
 .wrapper .pass-indicator {
